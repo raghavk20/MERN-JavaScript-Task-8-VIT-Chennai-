@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    #train {
+      position: absolute;
+      left: 0;
+      top: 100px;
+      width: 100px;
+      height: 50px;
+      background-color: white;
+      transition: left 1s linear;
+    }
+  </style>
+</head>
+<body>
+  <button id="startBtn">Start</button>
+  <button id="stopBtn">Stop</button>
+  <div id="train"></div>
+
+  <script>
+    var trainElement = document.getElementById("train");
+    var startButton = document.getElementById("startBtn");
+    var stopButton = document.getElementById("stopBtn");
+    var animationId;
+
+    function moveTrain() {
+      var currentPosition = parseInt(trainElement.style.left) || 0;
+      var newPosition = currentPosition + 10;
+      trainElement.style.left = newPosition + "px";
+
+      animationId = requestAnimationFrame(moveTrain);
+    }
+
+    startButton.addEventListener("click", function () {
+      animationId = requestAnimationFrame(moveTrain);
+    });
+
+    stopButton.addEventListener("click", function () {
+      cancelAnimationFrame(animationId);
+    });
+  </script>
+</body>
+</html>
